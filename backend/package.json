@@ -1,0 +1,30 @@
+{
+  "name": "backend",
+  "module": "index.ts",
+  "type": "module",
+  "dependencies": {
+    "@types/node": "^22.13.10",
+    "drizzle-orm": "^0.40.0",
+    "elysia": "^1.2.25",
+    "postgres": "^3.4.5",
+    "uuid": "^11.1.0"
+  },
+  "devDependencies": {
+    "@biomejs/biome": "1.9.4",
+    "@types/bun": "^1.2.4",
+    "drizzle-kit": "^0.30.5"
+  },
+  "peerDependencies": {
+    "typescript": "^5.8.2"
+  },
+  "scripts": {
+    "start": "bun run src/index.ts",
+    "dev": "bun --watch run src/index.ts",
+    "build": "bun build  src/index.ts --outdir ./dist --target bun --format cjs --minify",
+    "compile": "bun build --compile src/index.ts --outfile ./bin/app",
+    "db:gen": "bun drizzle-kit generate",
+    "db:migrate": "bun drizzle-kit migrate",
+    "db:init": "bun run scripts/initial.ts",
+    "start:db": "docker run --name dev-db -p 5432:5432 -e POSTGRES_PASSWORD=secret -d postgres:17.4-alpine3.21"
+  }
+}
